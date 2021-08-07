@@ -1,0 +1,95 @@
+@import "./../mixin&functions.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  @include themify() {
+    font-size: $fontSize;
+    background-color: themed("backgroundColor");
+    color: themed("textColor");
+    transition: $transition;
+    font-family: $fontFamily;
+    font-weight: 600;
+    .primary-background {
+      border-radius: 6px;
+      background-color: themed("elementColor");
+      box-shadow: 0px 0px 5px themed("boxShadowColor");
+      color: themed("textColor");
+      transition: $transition;
+    }
+    button.back-route {
+      border: none;
+      outline: none;
+      font-size:15px;
+      padding: 11px 30px;
+      cursor: pointer;
+      user-select: none;
+    }
+    header {
+      box-shadow: 0px 1px 5px themed("boxShadowColor");
+    }
+    input {
+      color: themed("textColor");
+      font-size: 14px;
+      &::placeholder {
+        color: themed("textColor");
+      }
+    }
+    .search-input {
+      .prefix {
+        border-top-color: themed("textColor") !important;
+      }
+      .select-inner:after {
+        border-top-color: themed("textColor") !important;
+      }
+    }
+    svg.loading path,
+    svg.loading rect{
+      fill: themed('textColor');
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+// class
+
+.font-bold {
+  font-weight: bold !important;
+}
+
+.font-normal {
+  font-weight: 500 !important;
+}
+
+.font-600 {
+  font-weight: 600 !important;
+}
+
+.font-light {
+  font-weight: 300 !important;
+}
+
+.font-30 {
+  font-size: 30px !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+
+
+.bg-danger {
+  background-color: red !important;
+}

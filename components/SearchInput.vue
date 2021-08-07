@@ -1,0 +1,60 @@
+<template>
+  <div class="primary-background search-input" @click="focusInput">
+    <fa-icon :icon="['fa','search']" class="search-icon prefix cursor-pointer" />
+    <input ref="searchInput" v-model.lazy="searchInput" type="text" placeholder="Search for a country...">
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    value: {
+      type: String,
+      require: true,
+    }
+  },
+  computed: {
+    searchInput: {
+      get() {
+        return this.value || '';
+      }, set(value) {
+        console.log(value);
+        // const currentQueries = this.$router.currentRoute.query;
+        // this.$router.push({path: '/',query: {...currentQueries, search: value}});
+        // this.$router.push()
+        this.$emit('input', value);
+      }
+    }
+  },
+  methods: {
+    focusInput() {
+      this.$nextTick(() => this.$refs.searchInput.focus());
+    }
+  }
+}
+</script>
+
+<style scoped lang="scss">
+.search-input {
+  padding-left: 1em;
+  width: 100%;
+  height: 47px;
+  position: relative;
+  padding-left: 60px;
+  .search-icon {
+    font-size: 16px;
+    position: absolute;
+    left: 1.7rem;
+    top: calc(50% - 8px);
+  }
+  input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding-left: 7px;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+</style>

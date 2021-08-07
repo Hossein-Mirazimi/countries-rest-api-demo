@@ -1,0 +1,30 @@
+
+/* Dark */
+$darkModeElementColor: hsl(209, 23%, 22%);
+$darkModeBackgroundColor: hsl(207, 26%, 17%);
+
+/* Light */
+$lightModeText: hsl(200, 15%, 8%);
+$lightModeInputColor: hsl(0, 0%, 52%);
+$lightModeBackgroundColor: hsl(0, 0%, 98%);
+
+$darkModeText_lightModeElementColor: hsl(0, 0%, 100%);
+
+$transition: .2s all linear;
+$fontSize: 14px;
+$fontFamily: 'Nunito Sans';
+
+$themes: (
+  dark-mode:(
+    backgroundColor: $darkModeBackgroundColor,
+    textColor: $darkModeText_lightModeElementColor,
+    elementColor: $darkModeElementColor,
+    boxShadowColor: #1f2c35
+  ),
+  light-mode:(
+    backgroundColor: $lightModeBackgroundColor,
+    textColor: $lightModeText,
+    elementColor: $darkModeText_lightModeElementColor,
+    boxShadowColor: #efefef
+  )
+);

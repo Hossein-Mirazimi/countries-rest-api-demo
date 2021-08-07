@@ -1,0 +1,14 @@
+@import './../variable.scss';
+
+@mixin fontMixin($url, $weight) {
+  @font-face {
+    font-family: $fontFamily;
+    src: url('../fonts/'+ $url);
+    font-weight: $weight;
+    font-style: normal;
+  }
+}
+
+@include fontMixin('NunitoSans-Light.ttf', 300);
+@include fontMixin('NunitoSans-SemiBold.ttf', 600);
+@include fontMixin('NunitoSans-ExtraBold.ttf', 800);

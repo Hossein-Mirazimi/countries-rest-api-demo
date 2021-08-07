@@ -18,10 +18,15 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/styles/bootstrap-grid.css',
+    '@/assets/styles/fontStyle.scss',
+    '@/assets/styles/global.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugin/filters',
+    {src: '@/plugin/vueLazyLoad', mode: 'client'}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -29,7 +34,34 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/color-mode',
+    '@nuxtjs/fontawesome',
   ],
+
+  // Color-mode module configuration: https://color-mode.nuxtjs.org/
+  colorMode: {
+    preference: 'system', // default value of $colorMode.preference
+    fallback: 'light', // fallback value if not system preference found
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    classSuffix: '-mode',
+    storageKey: 'color-mode'
+  },
+
+  // Fontawesome module configuration: https://fontawesome.com/
+  fontawesome: {
+    component: 'Fa',
+    suffix: true,
+    icons: {
+      solid: [ 'faSearch', 'faChevronDown', 'faMoon', 'faLongArrowAltLeft' ],
+      regular: [ 'faMoon' ],
+      light: [  ],
+      duotone: [  ],
+      brands: [  ]
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
