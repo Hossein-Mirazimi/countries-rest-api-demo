@@ -26,11 +26,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      headerPattern: require("@/assets/images/bg-pattern-header.svg"),
-    };
-  },
   methods: {
     switchTheme() {
       const currentTheme = this.$colorMode.value;
@@ -44,6 +39,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/variable.scss";
+
 #app {
   .header-container {
     height: 60px;

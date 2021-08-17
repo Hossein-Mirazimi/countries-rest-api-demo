@@ -1,8 +1,10 @@
 <template>
   <figure v-lazyload class="image__wrapper">
+    <!-- loading -->
     <div class="image__spinner">
       <loading class="loading" />
     </div>
+    <!-- image -->
     <img :data-url="src" :style="{'border-radius': `${radiusT}px ${radiusT}px 0 0`}" class="flag image__item" alt="" />
   </figure>
 </template>
@@ -28,20 +30,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* .image__spinner {
-  width: 100%;
-} */
+
 .image {
   &__wrapper {
     position: relative;
     display: flex;
     width: 100%;
-    // height: 100%;
     justify-content: center;
     align-items: center;
-    // border-radius: 4px;
     .image__spinner {
-      // background-color: red;
       height: 160px;
       width: 100%;
       .loading {
@@ -74,7 +71,6 @@ export default {
 
   &__item {
     width: 100%;
-    // border-radius: 4px;
     transition: all 0.4s ease-in-out;
     opacity: 0;
     visibility: hidden;

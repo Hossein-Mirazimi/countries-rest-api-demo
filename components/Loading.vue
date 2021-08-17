@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <svg
     version="1.1"
     class="loading"
@@ -36,10 +36,3 @@
     </path>
   </svg>
 </template>
-
-<script>
-export default {};
-</script>
-
-<style>
-</style>

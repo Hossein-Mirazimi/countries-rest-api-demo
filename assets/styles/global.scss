@@ -13,6 +13,12 @@ body {
     transition: $transition;
     font-family: $fontFamily;
     font-weight: 600;
+    a {
+      color: themed('textColor');
+      &.link {
+        text-decoration: underline;
+      }
+    }
     .primary-background {
       border-radius: 6px;
       background-color: themed("elementColor");
@@ -88,8 +94,3 @@ a {
   text-align: center !important;
 }
 
-
-
-.bg-danger {
-  background-color: red !important;
-}

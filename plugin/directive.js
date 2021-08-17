@@ -9,7 +9,7 @@ export const lazyImage = {
         imageElement.addEventListener("load", () => {
           setTimeout(() => el.classList.add("loaded"), 100);
         });
-        imageElement.addEventListener("error", () => console.log("error"));
+        imageElement.addEventListener("error", () => console.error("error"));
         imageElement.src = imageElement.dataset.url;
       }
     }

@@ -9,6 +9,8 @@
 
       <fa-icon class="suffix-icon" :icon="['fa','chevron-down']"/>
     </div>
+    
+    <!-- dropdown list -->
     <transition name="drop-down">
       <div v-if="showDropDown" class="options primary-background mt-2">
         <div
@@ -53,21 +55,16 @@ export default {
         }
         return 'Filter By Region';
       }, set(value) {
-        // const currentQueries = this.$router.currentRoute.query;
-        // this.$router.push({path: '/', query: {...currentQueries, region: value.value}})
-        // console.log();
-        // console.log(this.$router.push('/',{query: {region: value.value}}));
         this.$emit('input', value.value)
       }
     },
-  },
-  mounted() {
-    // this.$emit("input", this.selected);
   },
 };
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/variable.scss';
+
 .select {
   position: relative;
   width: 100%;
@@ -77,7 +74,6 @@ export default {
   height: 47px;
   line-height: 47px;
   .select-inner {
-    // color: #fff;
     padding-left: 1em;
 
     // arrow
@@ -86,7 +82,7 @@ export default {
       top: calc(50% - 5px);
       right: 1.5em;
       font-size: 10px;
-      transition: .2s all ease-in-out;
+      transition: $transition;
     }
 
     // arrow open drop down

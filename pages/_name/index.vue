@@ -1,12 +1,13 @@
 <template>
   <div class="container pb-5">
     <div class="mt-5">
-      <router-link to="/">
+      <!-- back link -->
+      <nuxt-link to="/">
         <button class="primary-background back-route d-flex align-items-center">
           <fa-icon class="icon" :icon="['fa','long-arrow-alt-left']" />
           Back
         </button>
-      </router-link>
+      </nuxt-link>
     </div>
     <div v-if="$fetchState.pending" class="d-flex mt-5 justify-content-center">
       <loading />
@@ -64,7 +65,7 @@
                   <span
                     v-for="(currency, index) in country.currencies"
                     :key="index"
-                    >{{ `${index == 0 ? "" : ","} ${currency.name}` }}</span
+                    >{{ `${index == 0 ? "" : ", "}${currency.name}` }}</span
                   >
                 </span>
               </div>
@@ -96,14 +97,12 @@
 export default {
   async fetch() {
     const { params } = this.$route;
-    console.log(params.name.toLowerCase());
     const url = `https://restcountries.eu/rest/v2/name/${params.name.toLowerCase()}`;
 
     await this.$axios
       .get(url)
       .then((response) => {
         if (response.status === 200) {
-          console.log({...response.data[0]});
           this.country = response.data[0];
         }
       })

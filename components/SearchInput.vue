@@ -1,6 +1,9 @@
 <template>
   <div class="primary-background search-input" @click="focusInput">
+
+    <!-- prefix -->
     <fa-icon :icon="['fa','search']" class="search-icon prefix cursor-pointer" />
+
     <input ref="searchInput" v-model.lazy="searchInput" type="text" placeholder="Search for a country...">
   </div>
 </template>
@@ -18,10 +21,6 @@ export default {
       get() {
         return this.value || '';
       }, set(value) {
-        console.log(value);
-        // const currentQueries = this.$router.currentRoute.query;
-        // this.$router.push({path: '/',query: {...currentQueries, search: value}});
-        // this.$router.push()
         this.$emit('input', value);
       }
     }
@@ -41,6 +40,8 @@ export default {
   height: 47px;
   position: relative;
   padding-left: 60px;
+  
+  // prefix
   .search-icon {
     font-size: 16px;
     position: absolute;

@@ -16,15 +16,13 @@
       <div class="msg">{{ $fetchState.error.message }}</div>
     </div>
     <div v-else class="row mt-4 mt-sm-5">
-      <client-only>
-        <div
-          class="col-12 col-sm-6 col-md-4 col-lg-3 px-3"
-          v-for="(country, index) in filterCountries"
-          :key="index"
-        >
-          <country-card :country="country" />
-        </div>
-      </client-only>
+      <div
+        class="col-12 col-sm-6 col-md-4 col-lg-3 px-3"
+        v-for="(country, index) in filterCountries"
+        :key="index"
+      >
+        <country-card :country="country" />
+      </div>
     </div>
   </div>
 </template>
@@ -35,12 +33,12 @@ export default {
   watchQuery: ["region"],
   async fetch() {
     const { query } = this.$route;
-    const getAllUrl = query.region
+    const url = query.region
       ? `https://restcountries.eu/rest/v2/region/${query.region.toLowerCase()}`
       : "https://restcountries.eu/rest/v2/all";
 
     await this.$axios
-      .get(getAllUrl)
+      .get(url)
       .then((response) => {
         if (response.status === 200) {
           this.countries = response.data;
@@ -133,7 +131,6 @@ export default {
       },
       set(region) {
         const { query } = this.$route;
-        console.log("update region", region);
         this.$router.push({ path: "/", query: { ...query, region } });
       },
     },
