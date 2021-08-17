@@ -1,27 +1,38 @@
-<template functional>
-  <nuxt-link :to="`/${props.country.name}`">
+<template>
+  <nuxt-link :to="`/${country.name}`">
     <div class="country-card primary-background">
-      <lazy-img :src="props.country.flag" :radiusT="6" class="flag"/>
+      <lazy-img :src="country.flag" :radiusT="6" class="flag"/>
       <div class="content">
-        <div class="country-name font-bold">{{ props.country.name }}</div>
+        <div class="country-name font-bold">{{ country.name }}</div>
         <div class="mt-3">
           <span>Population: </span>
           <span class="font-light">{{
-            props.country.population | numberFormat
+            country.population | numberFormat
           }}</span>
         </div>
         <div class="mt-2">
           <span>Region: </span>
-          <span class="font-light">{{ props.country.region }}</span>
+          <span class="font-light">{{ country.region }}</span>
         </div>
         <div class="mt-2 mb-4">
           <span>Capital: </span>
-          <span class="font-light">{{ props.country.capital }}</span>
+          <span class="font-light">{{ country.capital }}</span>
         </div>
       </div>
     </div>
   </nuxt-link>
 </template>
+
+<script>
+export default {
+  props: {
+    country: {
+      type: Object,
+      required: true
+    }
+  }
+}
+</script>
 
 <style scoped lang="scss">
 .country-card {
