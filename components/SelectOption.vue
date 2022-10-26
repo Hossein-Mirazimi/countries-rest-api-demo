@@ -2,14 +2,14 @@
   <div class="select" @blur="showDropDown = false">
     <div
       class="select-inner primary-background cursor-pointer"
-      @click="showDropDown = !showDropDown"
       :class="{'open-options': showDropDown}"
+      @click="showDropDown = !showDropDown"
     >
       {{ selected }}
 
       <fa-icon class="suffix-icon" :icon="['fa','chevron-down']"/>
     </div>
-    
+
     <!-- dropdown list -->
     <transition name="drop-down">
       <div v-if="showDropDown" class="options primary-background mt-2">
@@ -50,7 +50,7 @@ export default {
     selected: {
       get() {
         if(this.value) {
-          let option = this.options.find(e => e.value == this.value);
+          const option = this.options.find(e => e.value === this.value);
           return option.text;
         }
         return 'Filter By Region';
@@ -100,7 +100,7 @@ export default {
     left: 0;
     right: 0;
     z-index: 1;
-    
+
     // option item
     div {
       padding-left: 1em;

@@ -14,12 +14,12 @@
 
 <script>
   export default {
-    props: ['error'],
-    layout: 'error-layout' // custom layout for the error page
+    layout: 'error-layout',
+    props: ['error'] // custom layout for the error page
   }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .status-code {
   font-size: 6rem !important;
 }

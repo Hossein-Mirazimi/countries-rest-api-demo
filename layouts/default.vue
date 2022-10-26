@@ -29,7 +29,7 @@ export default {
   methods: {
     switchTheme() {
       const currentTheme = this.$colorMode.value;
-      let theme = currentTheme === 'dark' ? 'light' : 'dark';
+      const theme = currentTheme === 'dark' ? 'light' : 'dark';
 
       this.$colorMode.preference = theme;
     },
