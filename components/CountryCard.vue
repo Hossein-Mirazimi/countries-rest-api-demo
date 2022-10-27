@@ -1,7 +1,7 @@
 <template>
   <nuxt-link :to="`/${country.name}`">
     <div class="country-card primary-background">
-      <lazy-img :src="country.flag.png" :radiusT="6" class="flag"/>
+      <lazy-img :src="country.flags.png" :radius-t="6" class="flag"/>
       <div class="content">
         <div class="country-name font-bold">{{ country.name }}</div>
         <div class="mt-3">

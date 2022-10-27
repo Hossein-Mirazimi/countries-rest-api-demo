@@ -13,6 +13,9 @@
 import {lazyImage} from '@/plugin/directive';
 
 export default {
+  directives: {
+    lazyload: lazyImage,
+  },
   props: {
     src: {
       type: String,
@@ -22,9 +25,6 @@ export default {
       type: Number,
       default:0
     }
-  },
-  directives: {
-    lazyload: lazyImage,
   },
 };
 </script>

@@ -14,6 +14,7 @@ export default {
     value: {
       type: String,
       require: true,
+      default: null,
     }
   },
   computed: {
@@ -40,7 +41,7 @@ export default {
   height: 47px;
   position: relative;
   padding-left: 60px;
-  
+
   // prefix
   .search-icon {
     font-size: 16px;

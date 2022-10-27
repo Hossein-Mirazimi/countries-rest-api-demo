@@ -10,7 +10,7 @@
       </nuxt-link>
     </div>
     <div v-if="$fetchState.pending" class="d-flex mt-5 justify-content-center">
-      <loading />
+      <LoadingCom />
     </div>
     <div v-else-if="$fetchState.error" class="text-center error mt-5">
       <div class="font-bold font-30">{{ $fetchState.error.statusCode }}</div>
@@ -84,7 +84,7 @@
           <div v-if="country.borders && country.borders.length > 0" class="mt-5 d-flex flex-column flex-lg-row flex-wrap align-items-lg-baseline">
             <span class="font-600 mr-2 mb-3 mb-xl-0">Border Countries: </span>
             <div>
-              <button class="primary-background border-btn" v-for="(border, index) in country.borders" :key="index">{{ border }}</button>
+              <button v-for="(border, index) in country.borders" :key="index" class="primary-background border-btn">{{ border }}</button>
             </div>
           </div>
         </div>
@@ -94,10 +94,16 @@
 </template>
 
 <script>
+import { fetchCountryByName } from '~/util/endpoint';
 export default {
+  data() {
+    return {
+      country: null,
+    };
+  },
   async fetch() {
     const { params } = this.$route;
-    const url = `https://restcountries.eu/rest/v2/name/${params.name.toLowerCase()}`;
+    const url = fetchCountryByName(params.name);
 
     await this.$axios
       .get(url)
@@ -109,11 +115,6 @@ export default {
       .catch(() => {
         throw new Error("Error: Server has a problem");
       });
-  },
-  data() {
-    return {
-      country: null,
-    };
   },
 };
 </script>
