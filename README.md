@@ -46,7 +46,7 @@ $ npm run generate
 
 - [Vue Router](https://github.com/vuejs/vue-router)
 - [`nuxtjs/color-mode`](https://color-mode.nuxtjs.org/)
-- [aaxios](https://axios-http.com/)
+- [axios](https://axios-http.com/)
 
 ### Coding Style
 
