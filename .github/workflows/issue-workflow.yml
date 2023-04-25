@@ -1,0 +1,14 @@
+name: Issue Workflow
+
+on:
+  issues:
+    types: [opened, edited, milestoned, deleted, closed, labeled]
+
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Log
+        run: echo "Issue Workflow"
+      - name: Output Context
+        run: echo "${{ toJSON(github) }}"
