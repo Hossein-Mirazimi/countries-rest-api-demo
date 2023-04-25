@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
-      - name: Install Node
+      - name: Install Nodejs
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
-      - name: Install Node
+      - name: Install Nodejs
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -38,8 +38,8 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
-      - name: Install Node
-        uses: actions/setup-node
+      - name: Install Nodejs
+        uses: actions/setup-node@v3
         with:
           node-version: 18
       - name: Deploy on Server
