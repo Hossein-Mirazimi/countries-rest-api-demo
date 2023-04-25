@@ -8,3 +8,17 @@ jobs:
     steps:
       - name: Output Github context
         run: echo "${{ toJSON(github) }}"
+      - name: Output Runner context
+        run: echo "${{ toJSON(runner) }}"
+      - name: Output env context
+        run: echo "${{ toJSON(env) }}"
+      - name: Output vars context
+        run: echo "${{ toJSON(vars) }}"
+      - name: Output secrets context
+        run: echo "${{ toJSON(secrets) }}"
+      - name: Output matrix context
+        run: echo "${{ toJSON(matrix) }}"
+      - name: Output needs context
+        run: echo "${{ toJSON(needs) }}"
+      - name: Output inputs context
+        run: echo "${{ toJSON(inputs) }}"
