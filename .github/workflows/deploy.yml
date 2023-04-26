@@ -7,8 +7,8 @@ on:
       - main
       - 'dev-*'   # dev-new dev-k8s-stg dev-stg
       - 'feat/**' # feat/new feat/new/button
-    paths-ignore:
-      - '.github/workflows/*'
+    # paths-ignore:
+    #   - '.github/workflows/*'
 
   pull_request:
     types:
@@ -70,7 +70,7 @@ jobs:
       - name: Build Project
         run: npm run generate
       - name: upload Artifacts
-        uses: actions/upload-artifact
+        uses: actions/upload-artifact@v3
         with:
           name: dist-file
           path: |
