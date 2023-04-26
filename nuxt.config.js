@@ -1,4 +1,5 @@
 export default {
+  // just add comment
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Countries Rest API',
