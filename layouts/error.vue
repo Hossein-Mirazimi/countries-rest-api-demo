@@ -14,13 +14,14 @@
 
 <script>
   export default {
-    layout: 'error-layout',
+    layout: 'empty',
     props: ['error'] // custom layout for the error page
   }
 </script>
 
 <style scoped>
 .status-code {
+  /* stylelint-disable */
   font-size: 6rem !important;
 }
 </style>

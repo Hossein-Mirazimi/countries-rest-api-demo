@@ -10,8 +10,8 @@
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore",
     "lint:prettier": "prettier --check .",
-    "lint": "npm run lint:js && npm run lint:style",
-    "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix && npm run lint:style -- --fix",
+    "lint": "yarn run lint:js && yarn run lint:style",
+    "lintfix": "prettier --write --list-different . && yarn run lint:js -- --fix && yarn run lint:style -- --fix",
     "prepare": "husky install",
     "test": "jest"
   },
