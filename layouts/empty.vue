@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height">
-    <nuxt/>
+    <slot/>
   </div>
 </template>
 

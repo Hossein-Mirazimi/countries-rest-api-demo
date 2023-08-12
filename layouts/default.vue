@@ -15,26 +15,23 @@
           class="theme-switcher cursor-pointer align-items-center d-flex"
           @click="switchTheme"
         >
-          <fa-icon class="icon" :icon="[$colorMode.value == 'dark' ? 'fa' : 'far', 'moon']" />
+          <!-- <fa-icon class="icon" :icon="[$colorMode.value == 'dark' ? 'fa' : 'far', 'moon']" /> -->
           <div class="ml-2">Dark Mode</div>
         </div>
       </div>
     </header>
-    <nuxt />
+    <slot />
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    switchTheme() {
-      const currentTheme = this.$colorMode.value;
-      const theme = currentTheme === 'dark' ? 'light' : 'dark';
+<script lang="ts" setup>
+const colorMode = useColorMode();
+function switchTheme() {
+  const currentTheme = colorMode.value;
+  const theme = currentTheme === 'dark' ? 'light' : 'dark';
 
-      this.$colorMode.preference = theme;
-    },
-  },
-};
+  colorMode.preference = theme;
+}
 </script>
 
 <style scoped lang="scss">

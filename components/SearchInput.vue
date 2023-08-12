@@ -2,7 +2,7 @@
   <div class="primary-background search-input" @click="focusInput">
 
     <!-- prefix -->
-    <fa-icon :icon="['fa','search']" class="search-icon prefix cursor-pointer" />
+    <!-- <fa-icon :icon="['fa','search']" class="search-icon prefix cursor-pointer" /> -->
 
     <input ref="searchInput" v-model.lazy="searchInput" type="text" placeholder="Search for a country...">
   </div>
@@ -11,7 +11,7 @@
 <script>
 export default {
   props: {
-    value: {
+    modelValue: {
       type: String,
       require: true,
       default: null,
@@ -20,9 +20,9 @@ export default {
   computed: {
     searchInput: {
       get() {
-        return this.value || '';
+        return this.modelValue || '';
       }, set(value) {
-        this.$emit('input', value);
+        this.$emit('update:model-value', value);
       }
     }
   },

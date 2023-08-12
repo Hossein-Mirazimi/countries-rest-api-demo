@@ -1,51 +1,50 @@
 <template>
   <div class="container pb-5">
     <div class="mt-5">
-      <!-- back link -->
       <nuxt-link to="/">
         <button class="primary-background back-route d-flex align-items-center">
-          <fa-icon class="icon" :icon="['fa','long-arrow-alt-left']" />
+          <!-- <fa-icon class="icon" :icon="['fa','long-arrow-alt-left']" /> -->
           Back
         </button>
       </nuxt-link>
     </div>
-    <div v-if="$fetchState.pending" class="d-flex mt-5 justify-content-center">
+    <div v-if="pending" class="d-flex mt-5 justify-content-center">
       <LoadingCom />
     </div>
-    <div v-else-if="$fetchState.error" class="text-center error mt-5">
-      <div class="font-bold font-30">{{ $fetchState.error.statusCode }}</div>
-      <div class="msg">{{ $fetchState.error.message }}</div>
+    <div v-else-if="error" class="text-center error mt-5">
+      <div class="font-bold font-30">{{ error.statusCode }}</div>
+      <div class="msg">{{ error.message }}</div>
     </div>
-    <div v-else class="row country justify-content-between">
+    <div v-else-if="country" class="row country justify-content-between">
       <div class="col-12 col-lg-6 pr-lg-5">
-        <lazy-img :src="country.flag"/>
+        <MyImage :src="country[0].flag"/>
       </div>
       <div class="col-12 col-lg-6 pl-lg-5">
         <div class="detail">
-          <h1 class="title" v-text="country.name" />
+          <h1 class="title" v-text="country[0].name" />
           <div class="row">
             <div class="col-12 col-md-12 col-lg-6">
               <div class="detail-item">
                 <span class="font-600">Native Name: </span>
-                <span class="font-light" v-text="country.nativeName" />
+                <span class="font-light" v-text="country[0].nativeName" />
               </div>
               <div class="detail-item">
                 <span class="font-600">Population: </span>
                 <span class="font-light">{{
-                  country.population | numberFormat
+                  numberFormat(country[0].population)
                 }}</span>
               </div>
               <div class="detail-item">
                 <span class="font-600">Region: </span>
-                <span class="font-light" v-text="country.region" />
+                <span class="font-light" v-text="country[0].region" />
               </div>
               <div class="detail-item">
                 <span class="font-600">Sub Region: </span>
-                <span class="font-light" v-text="country.subregion" />
+                <span class="font-light" v-text="country[0].subregion" />
               </div>
               <div class="detail-item">
                 <span class="font-600">Capital: </span>
-                <span class="font-light" v-text="country.capital" />
+                <span class="font-light" v-text="country[0].capital" />
               </div>
             </div>
             <div class="col-12 col-md-12 col-lg-6">
@@ -53,7 +52,7 @@
                 <span class="font-600">Top Level Domain: </span>
                 <span class="font-light">
                   <span
-                    v-for="(domain, index) in country.topLevelDomain"
+                    v-for="(domain, index) in country[0].topLevelDomain"
                     :key="index"
                     >{{ `${index == 0 ? "" : ","} ${domain}` }}</span
                   >
@@ -63,7 +62,7 @@
                 <span class="font-600">Currencies: </span>
                 <span class="font-light">
                   <span
-                    v-for="(currency, index) in country.currencies"
+                    v-for="(currency, index) in country[0].currencies"
                     :key="index"
                     >{{ `${index == 0 ? "" : ", "}${currency.name}` }}</span
                   >
@@ -73,7 +72,7 @@
                 <span class="font-600">Languages: </span>
                 <span class="font-light">
                   <span
-                    v-for="(lang, index) in country.languages"
+                    v-for="(lang, index) in country[0].languages"
                     :key="index"
                     >{{ `${index == 0 ? "" : ","} ${lang.name}` }}</span
                   >
@@ -81,10 +80,10 @@
               </div>
             </div>
           </div>
-          <div v-if="country.borders && country.borders.length > 0" class="mt-5 d-flex flex-column flex-lg-row flex-wrap align-items-lg-baseline">
+          <div v-if="country[0].borders && country[0].borders.length > 0" class="mt-5 d-flex flex-column flex-lg-row flex-wrap align-items-lg-baseline">
             <span class="font-600 mr-2 mb-3 mb-xl-0">Border Countries: </span>
             <div>
-              <button v-for="(border, index) in country.borders" :key="index" class="primary-background border-btn">{{ border }}</button>
+              <button v-for="(border, index) in country[0].borders" :key="index" class="primary-background border-btn">{{ border }}</button>
             </div>
           </div>
         </div>
@@ -93,30 +92,15 @@
   </div>
 </template>
 
-<script>
-import { fetchCountryByName } from '~/util/endpoint';
-export default {
-  data() {
-    return {
-      country: null,
-    };
-  },
-  async fetch() {
-    const { params } = this.$route;
-    const url = fetchCountryByName(params.name);
+<script lang="ts" setup>
+import { fetchCountryByName } from '#imports';
 
-    await this.$axios
-      .get(url)
-      .then((response) => {
-        if (response.status === 200) {
-          this.country = response.data[0];
-        }
-      })
-      .catch(() => {
-        throw new Error("Error: Server has a problem");
-      });
-  },
-};
+const route = useRoute();
+
+const url = fetchCountryByName(<string>route.params.name)
+const { data: country, pending, error } = useFetch<[any]>(url, { method: 'get'})
+
+const numberFormat = (value: string | number) => Number(value).toLocaleString()
 </script>
 
 <style lang="scss" scoped>

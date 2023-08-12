@@ -7,7 +7,7 @@
     >
       {{ selected }}
 
-      <fa-icon class="suffix-icon" :icon="['fa','chevron-down']"/>
+      <!-- <fa-icon class="suffix-icon" :icon="['fa','chevron-down']"/> -->
     </div>
 
     <!-- dropdown list -->

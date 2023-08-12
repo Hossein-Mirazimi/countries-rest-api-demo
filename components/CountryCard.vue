@@ -1,13 +1,13 @@
 <template>
-  <nuxt-link :to="`/${country.name}`">
+  <NuxtLink :to="`/${String(country.name).toLocaleLowerCase()}`">
     <div class="country-card primary-background">
-      <lazy-img :src="country.flags.png" :radius-t="6" class="flag"/>
+      <MyImage :src="country.flags.svg" :key="country.flags.png" :radius-t="6" class="flag"/>
       <div class="content">
         <div class="country-name font-bold">{{ country.name }}</div>
         <div class="mt-3">
           <span>Population: </span>
           <span class="font-light">{{
-            country.population | numberFormat
+            numberFormat(country.population)
           }}</span>
         </div>
         <div class="mt-2">
@@ -20,16 +20,19 @@
         </div>
       </div>
     </div>
-  </nuxt-link>
+  </NuxtLink>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: {
     country: {
       type: Object,
       required: true
     }
+  },
+  methods: {
+    numberFormat:(value: string | number) => Number(value).toLocaleString()
   }
 }
 </script>
