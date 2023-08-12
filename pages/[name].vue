@@ -99,7 +99,9 @@ const route = useRoute();
 
 const url = fetchCountryByName(<string>route.params.name)
 const { data: country, pending, error } = useFetch<[any]>(url, { method: 'get'})
-
+useHead(computed(() => ({
+  title: `Countries Rest API Demo | ${country.value[0].name}`,
+})))
 const numberFormat = (value: string | number) => Number(value).toLocaleString()
 </script>
 
