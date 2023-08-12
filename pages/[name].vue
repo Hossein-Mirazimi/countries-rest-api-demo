@@ -100,8 +100,20 @@ const route = useRoute();
 const url = fetchCountryByName(<string>route.params.name)
 const { data: country, pending, error } = useFetch<[any]>(url, { method: 'get'})
 useHead(computed(() => ({
-  title: `Countries Rest API Demo | ${country.value[0].name}`,
+  title: `Countries Rest API Demo | ${country.value?.[0].name}`,
 })))
+useSeoMeta(computed(() => ({
+  title: country.value?.[0].name,
+  description: `Countries Rest API Demo | ${country.value?.[0].name}`,
+  ogTitle: country.value?.[0].name,
+  ogDescription: `Countries Rest API Demo | ${country.value?.[0].name}`,
+  ogImage: country.value?.[0].flag,
+  ogUrl: route.path,
+  twitterTitle: country.value?.[0].name,
+  twitterDescription: `Countries Rest API Demo | ${country.value?.[0].name}`,
+  twitterImage: country.value?.[0].flag,
+  twitterCard: 'summary'
+})));
 const numberFormat = (value: string | number) => Number(value).toLocaleString()
 </script>
 

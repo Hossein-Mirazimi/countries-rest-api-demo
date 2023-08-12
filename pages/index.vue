@@ -66,7 +66,7 @@ const options= [
       ? fetchCountriesByRegion(String(route.query.region).toLowerCase())
       : fetchAllEndpoint;
 
-  const { pending, error, data: countries } = useFetch<Array<any>>(url, { key: 'test',  });
+  const { pending, error, data: countries } = useFetch<Array<any>>(url);
 
   const search = computed({
     get() {
