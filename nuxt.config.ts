@@ -15,7 +15,12 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
-  modules: ['@nuxtjs/color-mode', '@vueuse/nuxt'],
+  modules: [
+    '@nuxtjs/color-mode',
+    '@vueuse/nuxt',
+    'nuxt-simple-robots',
+    '@vite-pwa/nuxt',
+  ],
   css: [
     '@/assets/styles/bootstrap-grid.min.css',
     '@/assets/styles/fontStyle.scss',
