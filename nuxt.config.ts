@@ -1,5 +1,8 @@
-import { resolve } from 'node:path';
-import { icons } from './icons.json';
+import { resolve } from 'node:path'
+import { icons } from './icons.json'
+
+const MAX_AGE = 31536000
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
@@ -7,15 +10,21 @@ export default defineNuxtConfig({
       title: 'Countries Rest API Demo',
       htmlAttrs: {
         lang: 'en',
-        dir: 'ltr'
+        dir: 'ltr',
       },
       link: [
         {
           rel: 'icon',
           type: 'image/png',
-          href: '/favicon.png'
-        }
-      ]
+          href: '/favicon.png',
+        },
+      ],
+    },
+  },
+  nitro: {
+    routeRules: {
+      'https://flagcdn.com/**': { headers: { 'cache-control': `public,max-age=${MAX_AGE},s-maxage=${MAX_AGE}` } },
+      '/fonts/**': { headers: { 'cache-control': `public,max-age=${MAX_AGE},s-maxage=${MAX_AGE}` } },
     },
   },
   devtools: {
@@ -24,11 +33,13 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+  experimental: { typedPages: true },
   modules: [
     '@nuxtjs/color-mode',
     '@vueuse/nuxt',
     'nuxt-simple-robots',
     '@vite-pwa/nuxt',
+    'nuxt-icon',
   ],
   css: [
     '@/assets/styles/bootstrap-grid.min.css',
@@ -36,15 +47,15 @@ export default defineNuxtConfig({
     '@/assets/styles/global.scss',
   ],
   pwa: {
-    injectRegister: "auto",
-    registerType: "autoUpdate",
+    injectRegister: 'auto',
+    registerType: 'autoUpdate',
     workbox: {
       runtimeCaching: [
-        { urlPattern: "/", method: "GET", handler: "CacheOnly" },
+        { urlPattern: '/', method: 'GET', handler: 'CacheOnly' },
       ],
-      globDirectory: resolve(".output", "public"),
-      globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
-      swDest: "public",
+      globDirectory: resolve('.output', 'public'),
+      globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+      swDest: 'public',
     },
     client: {
       registerPlugin: true,
@@ -55,15 +66,15 @@ export default defineNuxtConfig({
       enabled: true,
       suppressWarnings: true,
       navigateFallbackAllowlist: [/^\/$/],
-      type: "module",
+      type: 'module',
     },
-    includeAssets: ["favicon.ico"],
+    includeAssets: ['favicon.ico'],
     manifest: {
-      start_url: "/",
-      name: "Countries Rest API Demo",
-      short_name: "Countries Demo",
-      description: "Countries Rest API Demo SSR",
-      theme_color: "#ffffff",
+      start_url: '/',
+      name: 'Countries Rest API Demo',
+      short_name: 'Countries Demo',
+      description: 'Countries Rest API Demo SSR',
+      theme_color: '#ffffff',
       icons,
     },
   },
