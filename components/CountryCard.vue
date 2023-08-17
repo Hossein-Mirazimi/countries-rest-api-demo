@@ -1,9 +1,25 @@
+<script lang="ts">
+export default {
+  props: {
+    country: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    numberFormat: (value: string | number) => Number(value).toLocaleString(),
+  },
+}
+</script>
+
 <template>
   <NuxtLink :to="`/${String(country.name).toLocaleLowerCase()}`">
     <div class="country-card primary-background">
-      <MyImage :src="country.flags.svg" :key="country.flags.png" :radius-t="6" class="flag"/>
+      <MyImage :key="country.flags.png" :src="country.flags.svg" :radius-t="6" class="flag" />
       <div class="content">
-        <div class="country-name font-bold">{{ country.name }}</div>
+        <div class="country-name font-bold">
+          {{ country.name }}
+        </div>
         <div class="mt-3">
           <span>Population: </span>
           <span class="font-light">{{
@@ -22,20 +38,6 @@
     </div>
   </NuxtLink>
 </template>
-
-<script lang="ts">
-export default {
-  props: {
-    country: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    numberFormat:(value: string | number) => Number(value).toLocaleString()
-  }
-}
-</script>
 
 <style scoped lang="scss">
 .country-card {

@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height">
-    <slot/>
+    <slot />
   </div>
 </template>
 
