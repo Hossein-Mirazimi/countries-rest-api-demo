@@ -6,6 +6,7 @@
     src: url('/fonts/'+ $url);
     font-weight: $weight;
     font-style: normal;
+    font-display: swap;
   }
 }
 
