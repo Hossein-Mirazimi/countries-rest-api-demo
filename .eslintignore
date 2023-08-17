@@ -1,0 +1,11 @@
+node_modules
+dist
+.output
+.nuxt
+.husky
+.github
+yarn.lock
+*.spec.js
+*.spec.ts
+workbox*
+public.js
