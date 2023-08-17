@@ -10,29 +10,28 @@
           justify-content-between
         "
       >
-        <div class="title font-bold">Where in the world?</div>
-        <div
-          class="theme-switcher cursor-pointer align-items-center d-flex"
-          @click="switchTheme"
-        >
-          <!-- <fa-icon class="icon" :icon="[$colorMode.value == 'dark' ? 'fa' : 'far', 'moon']" /> -->
-          <div class="ml-2">Dark Mode</div>
+        <div class="title font-bold">
+          Where in the world?
         </div>
+        <ClientOnly>
+          <DarkToggle v-slot="{ toggle }">
+            <div
+              class="theme-switcher cursor-pointer align-items-center d-flex"
+              @click="toggle"
+            >
+              <Icon v-if="$colorMode.value === 'dark'" class="icon" name="ri:sun-line" />
+              <Icon v-else class="icon" name="ri:moon-line" />
+              <div class="ml-2">
+                Dark Mode
+              </div>
+            </div>
+          </DarkToggle>
+        </ClientOnly>
       </div>
     </header>
     <slot />
   </div>
 </template>
-
-<script lang="ts" setup>
-const colorMode = useColorMode();
-function switchTheme() {
-  const currentTheme = colorMode.value;
-  const theme = currentTheme === 'dark' ? 'light' : 'dark';
-
-  colorMode.preference = theme;
-}
-</script>
 
 <style scoped lang="scss">
 @import "@/assets/variable.scss";
