@@ -1,3 +1,30 @@
+
+<script lang="ts" setup>
+import { fetchCountryByName } from '#imports';
+
+const route = useRoute();
+
+// @ts-ignore
+const url = fetchCountryByName(<string>(route.params.name!))
+const { data: country, pending, error } = useFetch<[any]>(url, { method: 'get'})
+useHead({
+  title: `Countries Rest API Demo | ${country.value?.[0].name}`,
+})
+useSeoMeta({
+  title: country.value?.[0].name,
+  description: `Countries Rest API Demo | ${country.value?.[0].name}`,
+  ogTitle: country.value?.[0].name,
+  ogDescription: `Countries Rest API Demo | ${country.value?.[0].name}`,
+  ogImage: country.value?.[0].flag,
+  ogUrl: route.path,
+  twitterTitle: country.value?.[0].name,
+  twitterDescription: `Countries Rest API Demo | ${country.value?.[0].name}`,
+  twitterImage: country.value?.[0].flag,
+  twitterCard: 'summary'
+});
+const numberFormat = (value: string | number) => Number(value).toLocaleString()
+</script>
+
 <template>
   <div class="container pb-5">
     <div class="mt-5">
@@ -12,12 +39,16 @@
       <LoadingCom />
     </div>
     <div v-else-if="error" class="text-center error mt-5">
-      <div class="font-bold font-30">{{ error.statusCode }}</div>
-      <div class="msg">{{ error.message }}</div>
+      <div class="font-bold font-30">
+        {{ error.statusCode }}
+      </div>
+      <div class="msg">
+        {{ error.message }}
+      </div>
     </div>
     <div v-else-if="country" class="row country justify-content-between">
       <div class="col-12 col-lg-6 pr-lg-5">
-        <MyImage :src="country[0].flag"/>
+        <MyImage :src="country[0].flag" />
       </div>
       <div class="col-12 col-lg-6 pl-lg-5">
         <div class="detail">
@@ -54,8 +85,7 @@
                   <span
                     v-for="(domain, index) in country[0].topLevelDomain"
                     :key="index"
-                    >{{ `${index == 0 ? "" : ","} ${domain}` }}</span
-                  >
+                  >{{ `${index == 0 ? "" : ","} ${domain}` }}</span>
                 </span>
               </div>
               <div class="detail-item">
@@ -64,8 +94,7 @@
                   <span
                     v-for="(currency, index) in country[0].currencies"
                     :key="index"
-                    >{{ `${index == 0 ? "" : ", "}${currency.name}` }}</span
-                  >
+                  >{{ `${index == 0 ? "" : ", "}${currency.name}` }}</span>
                 </span>
               </div>
               <div class="detail-item">
@@ -74,8 +103,7 @@
                   <span
                     v-for="(lang, index) in country[0].languages"
                     :key="index"
-                    >{{ `${index == 0 ? "" : ","} ${lang.name}` }}</span
-                  >
+                  >{{ `${index == 0 ? "" : ","} ${lang.name}` }}</span>
                 </span>
               </div>
             </div>
@@ -83,7 +111,9 @@
           <div v-if="country[0].borders && country[0].borders.length > 0" class="mt-5 d-flex flex-column flex-lg-row flex-wrap align-items-lg-baseline">
             <span class="font-600 mr-2 mb-3 mb-xl-0">Border Countries: </span>
             <div>
-              <button v-for="(border, index) in country[0].borders" :key="index" class="primary-background border-btn">{{ border }}</button>
+              <button v-for="(border, index) in country[0].borders" :key="index" class="primary-background border-btn">
+                {{ border }}
+              </button>
             </div>
           </div>
         </div>
@@ -91,31 +121,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { fetchCountryByName } from '#imports';
-
-const route = useRoute();
-
-const url = fetchCountryByName(<string>route.params.name)
-const { data: country, pending, error } = useFetch<[any]>(url, { method: 'get'})
-useHead(computed(() => ({
-  title: `Countries Rest API Demo | ${country.value?.[0].name}`,
-})))
-useSeoMeta(computed(() => ({
-  title: country.value?.[0].name,
-  description: `Countries Rest API Demo | ${country.value?.[0].name}`,
-  ogTitle: country.value?.[0].name,
-  ogDescription: `Countries Rest API Demo | ${country.value?.[0].name}`,
-  ogImage: country.value?.[0].flag,
-  ogUrl: route.path,
-  twitterTitle: country.value?.[0].name,
-  twitterDescription: `Countries Rest API Demo | ${country.value?.[0].name}`,
-  twitterImage: country.value?.[0].flag,
-  twitterCard: 'summary'
-})));
-const numberFormat = (value: string | number) => Number(value).toLocaleString()
-</script>
 
 <style lang="scss" scoped>
 .icon {
