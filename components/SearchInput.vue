@@ -1,38 +1,39 @@
+<script>
+export default {
+  props: {
+    modelValue: {
+      type: String,
+      require: true,
+      default: null,
+    },
+  },
+  emits: ['update:model-value'],
+  computed: {
+    searchInput: {
+      get() {
+        return this.modelValue || ''
+      },
+      set(value) {
+        this.$emit('update:model-value', value)
+      },
+    },
+  },
+  methods: {
+    focusInput() {
+      this.$nextTick(() => this.$refs.searchInput.focus())
+    },
+  },
+}
+</script>
+
 <template>
   <div class="primary-background search-input" @click="focusInput">
-
     <!-- prefix -->
-    <fa-icon :icon="['fa','search']" class="search-icon prefix cursor-pointer" />
+    <Icon name="fa:search" class="search-icon prefix cursor-pointer" />
 
     <input ref="searchInput" v-model.lazy="searchInput" type="text" placeholder="Search for a country...">
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    value: {
-      type: String,
-      require: true,
-      default: null,
-    }
-  },
-  computed: {
-    searchInput: {
-      get() {
-        return this.value || '';
-      }, set(value) {
-        this.$emit('input', value);
-      }
-    }
-  },
-  methods: {
-    focusInput() {
-      this.$nextTick(() => this.$refs.searchInput.focus());
-    }
-  }
-}
-</script>
 
 <style scoped lang="scss">
 .search-input {
@@ -58,5 +59,4 @@ export default {
     border: none;
   }
 }
-
 </style>

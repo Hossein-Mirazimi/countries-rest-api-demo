@@ -1,13 +1,48 @@
+<script>
+export default {
+  props: {
+    options: {
+      type: Array,
+      required: true,
+    },
+    modelValue: {
+      type: String,
+      required: false,
+      default: null,
+    },
+  },
+  emits: ['update:model-value'],
+  data() {
+    return {
+      showDropDown: false,
+    }
+  },
+  computed: {
+    selected: {
+      get() {
+        if (this.modelValue) {
+          const option = this.options.find(e => e.value === this.modelValue)
+          return option.text
+        }
+        return 'Filter By Region'
+      },
+      set(value) {
+        this.$emit('update:model-value', value.value)
+      },
+    },
+  },
+}
+</script>
+
 <template>
   <div class="select" @blur="showDropDown = false">
     <div
       class="select-inner primary-background cursor-pointer"
-      :class="{'open-options': showDropDown}"
+      :class="{ 'open-options': showDropDown }"
       @click="showDropDown = !showDropDown"
     >
       {{ selected }}
-
-      <fa-icon class="suffix-icon" :icon="['fa','chevron-down']"/>
+      <Icon name="fa:chevron-down" class="suffix-icon" />
     </div>
 
     <!-- dropdown list -->
@@ -27,40 +62,6 @@
     </transition>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    options: {
-      type: Array,
-      required: true,
-    },
-    value: {
-      type: String,
-      required: false,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      showDropDown: false,
-    };
-  },
-  computed: {
-    selected: {
-      get() {
-        if(this.value) {
-          const option = this.options.find(e => e.value === this.value);
-          return option.text;
-        }
-        return 'Filter By Region';
-      }, set(value) {
-        this.$emit('input', value.value)
-      }
-    },
-  },
-};
-</script>
 
 <style scoped lang="scss">
 @import '@/assets/variable.scss';
